@@ -10,9 +10,9 @@ namespace GigHub.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public GigsController(ApplicationDbContext context)
+        public GigsController()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         
         public ActionResult Create()
