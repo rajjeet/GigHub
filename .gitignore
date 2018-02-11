@@ -4,5 +4,7 @@
 *.user
 */_ReSharper.*
 */bin/*
+GigHub/GigHub/bin/
 */obj/*
+GigHub/GigHub/obj/
 */packages/*
