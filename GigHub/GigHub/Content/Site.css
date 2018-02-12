@@ -141,8 +141,8 @@ h6,
         .gigs > li .details {
             position: absolute;
             top: 0;
-            left: 70px;
-            width: 120px;
+            left: 100px;
+            width: 200px;
         }
 
         .gigs > li .artist {
