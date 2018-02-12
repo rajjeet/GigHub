@@ -22,16 +22,16 @@ namespace GigHub.Controllers
         {
             _attendeeId = User.Identity.GetUserId();
 
-            if (_context.Attendences.Any(a => a.AttendeeId == _attendeeId && a.GigId == dto.GigId))
+            if (_context.Attendances.Any(a => a.AttendeeId == _attendeeId && a.GigId == dto.GigId))
                 return BadRequest("User is already registered to this gig.");
 
-            var attendance = new Attendence
+            var attendance = new Attendance
             {
                 GigId = dto.GigId,
                 AttendeeId = _attendeeId
 
             };
-            _context.Attendences.Add(attendance);
+            _context.Attendances.Add(attendance);
             _context.SaveChanges();
 
             return Ok("User sucessfully registered to this gig!");

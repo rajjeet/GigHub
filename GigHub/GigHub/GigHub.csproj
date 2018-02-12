@@ -218,37 +218,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802101231033_InitialModel.cs" />
-    <Compile Include="Migrations\201802101231033_InitialModel.Designer.cs">
-      <DependentUpon>201802101231033_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101256148_CreateGigTable.cs" />
-    <Compile Include="Migrations\201802101256148_CreateGigTable.Designer.cs">
-      <DependentUpon>201802101256148_CreateGigTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101555432_OverrideConventionsForGigsAndGenres.cs" />
-    <Compile Include="Migrations\201802101555432_OverrideConventionsForGigsAndGenres.Designer.cs">
-      <DependentUpon>201802101555432_OverrideConventionsForGigsAndGenres.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101605189_PopulateGenresTable.cs" />
-    <Compile Include="Migrations\201802101605189_PopulateGenresTable.Designer.cs">
-      <DependentUpon>201802101605189_PopulateGenresTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802102051015_AddForeignKeyPropertiesToGig.cs" />
-    <Compile Include="Migrations\201802102051015_AddForeignKeyPropertiesToGig.Designer.cs">
-      <DependentUpon>201802102051015_AddForeignKeyPropertiesToGig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802112112518_AddNameToApplicationUser.cs" />
-    <Compile Include="Migrations\201802112112518_AddNameToApplicationUser.Designer.cs">
-      <DependentUpon>201802112112518_AddNameToApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802112259202_AddAttendeeModel.cs" />
-    <Compile Include="Migrations\201802112259202_AddAttendeeModel.Designer.cs">
-      <DependentUpon>201802112259202_AddAttendeeModel.cs</DependentUpon>
+    <Compile Include="Migrations\201802120213076_Initial.cs" />
+    <Compile Include="Migrations\201802120213076_Initial.Designer.cs">
+      <DependentUpon>201802120213076_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Attendence.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -338,26 +314,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802101231033_InitialModel.resx">
-      <DependentUpon>201802101231033_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101256148_CreateGigTable.resx">
-      <DependentUpon>201802101256148_CreateGigTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101555432_OverrideConventionsForGigsAndGenres.resx">
-      <DependentUpon>201802101555432_OverrideConventionsForGigsAndGenres.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101605189_PopulateGenresTable.resx">
-      <DependentUpon>201802101605189_PopulateGenresTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802102051015_AddForeignKeyPropertiesToGig.resx">
-      <DependentUpon>201802102051015_AddForeignKeyPropertiesToGig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802112112518_AddNameToApplicationUser.resx">
-      <DependentUpon>201802112112518_AddNameToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802112259202_AddAttendeeModel.resx">
-      <DependentUpon>201802112259202_AddAttendeeModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802120213076_Initial.resx">
+      <DependentUpon>201802120213076_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
