@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201802120213076_Initial.Designer.cs">
       <DependentUpon>201802120213076_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802120216305_SeedGenre.cs" />
+    <Compile Include="Migrations\201802120216305_SeedGenre.Designer.cs">
+      <DependentUpon>201802120216305_SeedGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -316,6 +320,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802120213076_Initial.resx">
       <DependentUpon>201802120213076_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802120216305_SeedGenre.resx">
+      <DependentUpon>201802120216305_SeedGenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
