@@ -31,17 +31,18 @@ namespace GigHub.Controllers
             var viewModel = new GigsViewModel
             {
                 UpcomingGigs = upcomingGigs,
-                ShowActions = User.Identity.IsAuthenticated
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Gigs I'm Attending"
             };
 
-            return View(viewModel);
+            return View("Gigs", viewModel);
         }
 
         [Authorize]
         public ActionResult Create()
-        {            
+        {
             var viewModel = new GigFormViewModel
-            { 
+            {
                 Genres = _context.Genres.ToList()
             };
             return View(viewModel);
@@ -60,15 +61,15 @@ namespace GigHub.Controllers
 
             var gig = new Gig
             {
-                 ArtistId = User.Identity.GetUserId(),  
+                ArtistId = User.Identity.GetUserId(),
                 DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
-                Venue = viewModel.Venue  
+                Venue = viewModel.Venue
             };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
-    } 
+    }
 }
