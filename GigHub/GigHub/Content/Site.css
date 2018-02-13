@@ -148,10 +148,20 @@ h6,
         .gigs > li .artist {
             font-weight: bold;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 1px;
         }
 
         .gigs > li .genre {
             color: #333;            
             font-size: 14px;            
         }
+
+.gigs > li .actions {
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.gigs > li:hover .actions {
+    display: block;
+}
