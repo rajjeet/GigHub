@@ -36,6 +36,5 @@ namespace GigHub.Controllers.Api
 
             return Ok("User sucessfully registered to this gig!");
         }
-
     }
 }
