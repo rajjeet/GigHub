@@ -16,7 +16,6 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();            
         }
 
-
         public ActionResult Index()
         {
             var upcomingGigs = _context.Gigs
