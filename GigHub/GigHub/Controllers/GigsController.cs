@@ -118,7 +118,7 @@ namespace GigHub.Controllers
                 Venue = gig.Venue,
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
-                Id = id
+                Id = gig.Id
             };
             return View("GigForm", viewModel);
         }
