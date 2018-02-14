@@ -22,7 +22,9 @@ namespace GigHub.Controllers
             var upcomingGigs = _context.Gigs
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now);
+                .Where(g => 
+                    g.DateTime > DateTime.Now &&
+                    !g.IsCancelled);
 
             var homeViewModel = new GigsViewModel
             {
