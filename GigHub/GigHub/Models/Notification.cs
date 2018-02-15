@@ -27,4 +27,4 @@ namespace GigHub.Models
         }
 
     }
-}
+    }
