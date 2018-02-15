@@ -34,7 +34,6 @@ namespace GigHub.Controllers.Api
                 Gig = gig
             };
 
-
             var attendances = _context.Attendances
                 .Where(a => a.GigId == gig.Id)
                 .Select(a => a.Attendee)
@@ -42,13 +41,7 @@ namespace GigHub.Controllers.Api
 
             foreach (var attendance in attendances)
             {
-                var userNotification = new UserNotification
-                {
-                    User = attendance,
-                    Notification = notification
-                };
-
-                _context.UserNotifications.Add(userNotification);
+                attendance.Notify(notification);
             }
 
             _context.SaveChanges();
