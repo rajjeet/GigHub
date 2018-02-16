@@ -9,6 +9,7 @@ namespace GigHub
     {
         protected void Application_Start()
         {
+            AutoMapperConfigurations.Configure();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -30,14 +30,6 @@ namespace GigHub.Controllers.Api
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
-
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<ApplicationUser, UserDto>();
-                cfg.CreateMap<Gig, GigDto>();
-                cfg.CreateMap<Notification, NotificationDto>();
-            });
-
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
 
