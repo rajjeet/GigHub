@@ -50,13 +50,51 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/underscore-template" id="notifications-template" >
+    <ul>
+        <% _.each(notifications, function(n) {
+            if (n.type == 1) { %>
+            <li>
+                <%= n.gig.artist.name %> has cancelled the gig at <%= n.gig.venue %> at <%= n.gig.dateTime %>.
+            </li>
+            <% } else if (n.type == 2 ) { %>
+            <li>
+                <%= n.gig.artist.name %> has changed the 
+                <% if (n.originalDateTime == n.gig.dateTime && n.originalVenue != n.gig.venue) {  %>
+                    venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
+                <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue == n.gig.venue) { %>
+                    date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>.
+                <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue != n.gig.venue) { %>
+                    date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %> 
+                        and the venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
+                <% } %>
+            </li>
+            <% } else if (n.type == 3 ) { %>
+            <li>
+                <%= n.gig.artist.name %> has created a gig at <%= n.gig.venue %> on <%= n.gig.dateTime %>.
+            </li>
+            <% }  %>
+        <% }) %>
+    </ul>
+    </script>
     <script>
         $(document).ready(function() {
             $.getJSON('/api/notifications',
                 function(notifications) {
                     $('.js-notifications-count')
                         .text(notifications.length)
-                        .removeClass('hide');
+                        .removeClass('hide')
+                        .addClass('animated tada');
+
+                    $('.notifications').popover({
+                        html: true,
+                        placement: 'bottom',
+                        title: 'Notifications',
+                        content: function () {
+                            var compiled = _.template($('#notifications-template').html());
+                            return compiled({ notifications : notifications });
+                        }
+                    });
                 });
         });
     </script>
