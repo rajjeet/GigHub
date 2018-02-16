@@ -1,4 +1,5 @@
-﻿using GigHub.Dtos;
+﻿using AutoMapper;
+using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
@@ -29,26 +30,15 @@ namespace GigHub.Controllers.Api
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
-            return notifications.Select(n => new NotificationDto()
+
+            Mapper.Initialize(cfg =>
             {
-                DateTime = n.DateTime,
-                OriginalDateTime = n.OriginalDateTime,
-                OriginalVenue = n.OriginalVenue,
-                Type = n.Type,
-                Gig = new GigDto
-                {
-                    Id = n.Gig.Id,
-                    Artist = new UserDto
-                    {
-                        Id = n.Gig.Artist.Id,
-                        Name = n.Gig.Artist.Name
-                    },
-                    DateTime = n.Gig.DateTime,
-                    Venue = n.Gig.Venue,
-                    IsCancelled = n.Gig.IsCancelled
-                }
-                
+                cfg.CreateMap<ApplicationUser, UserDto>();
+                cfg.CreateMap<Gig, GigDto>();
+                cfg.CreateMap<Notification, NotificationDto>();
             });
+
+            return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
 
     }
