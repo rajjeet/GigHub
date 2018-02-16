@@ -165,3 +165,15 @@ h6,
 .gigs > li:hover .actions {
     display: block;
 }
+
+.navbar-right .notifications {
+    position: relative;
+
+}
+
+.navbar-right .notifications .badge {
+    position: absolute;
+    top: 10px ;
+    right: -1px;
+    background: #a80a0a;
+} 
