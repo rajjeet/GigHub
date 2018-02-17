@@ -5,6 +5,17 @@
 }
 
 <h2>@Model.Heading</h2>
+@using (Html.BeginForm("Search", "Gigs"))
+{
+    <div class="form-group">
+        <div id="search-gigs" class="input-group">
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+    </div>
+}
 <ul class="gigs">
     @foreach (var gig in Model.UpcomingGigs)
     {
@@ -22,14 +33,14 @@
                     }
                 </span>
                 <span class="genre">@gig.Genre.Name</span>
-                    @if (Model.ShowActions && !@gig.IsCancelled)
-                    {
-                        <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
-                    }
-                    else
-                    {
-                        <span class="label label-warning pull-right">Cancelled</span>
-                    }
+                @if (Model.ShowActions && !@gig.IsCancelled)
+                {
+                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                }
+                else
+                {
+                    <span class="label label-warning pull-right">Cancelled</span>
+                }
             </div>
         </li>
     }
@@ -55,7 +66,7 @@
                 var button = $(e.target);
                 $.post("/api/followings", { followeeId: button.attr("data-followee-id") })
                     .done(function () {
-                        button                                                   
+                        button
                             .text("Unfollow");
                     })
                     .fail(function () {
@@ -64,5 +75,5 @@
             });
 
         });
-    </script> 
+    </script>
 }
