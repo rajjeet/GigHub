@@ -9,13 +9,13 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script type="text/javascript">
-        var appInsights=window.appInsights||function(config){
-            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace", "Ajax"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
         }({
-            instrumentationKey:"691460c4-88fa-43ae-8e0b-584c2b7e9cbd"
+            instrumentationKey: "691460c4-88fa-43ae-8e0b-584c2b7e9cbd"
         });
-        
-        window.appInsights=appInsights;
+
+        window.appInsights = appInsights;
         appInsights.trackPageView();
     </script>
     <meta name="description" content="The description of my page" />
@@ -29,11 +29,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("GigHub", "Index", "Home" , new RouteValueDictionary() , new { @class = "navbar-brand" })
+                @Html.ActionLink("GigHub", "Index", "Home", new RouteValueDictionary(), new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Create a Gig", "Create", "Gigs")</li>                    
+                    <li>@Html.ActionLink("Create a Gig", "Create", "Gigs")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -50,23 +50,23 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-<script type="text/underscore-template" id="notifications-template" >
-    <ul class="notifications">
-        <% _.each(notifications, function(n) {
+    <script type="text/underscore-template" id="notifications-template">
+        <ul class="notifications">
+            <% _.each(notifications, function(n) {
             if (n.type == 1) { %>
             <li>
                 <span class="highlight"><%= n.gig.artist.name %></span> has cancelled the gig at <%= n.gig.venue %> at <%= n.gig.dateTime %>.
             </li>
             <% } else if (n.type == 2 ) { %>
             <li>
-                <span class="highlight"><%= n.gig.artist.name %></span> has changed the 
+                <span class="highlight"><%= n.gig.artist.name %></span> has changed the
                 <% if (n.originalDateTime == n.gig.dateTime && n.originalVenue != n.gig.venue) {  %>
-                    venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
+                venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
                 <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue == n.gig.venue) { %>
-                    date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>.
+                date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>.
                 <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue != n.gig.venue) { %>
-                    date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %> 
-                        and the venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
+                date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>
+                and the venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
                 <% } %>
             </li>
             <% } else if (n.type == 3 ) { %>
@@ -74,11 +74,11 @@
                 <span class="highlight"><%= n.gig.artist.name %></span> has created a gig at <%= n.gig.venue %> on <%= n.gig.dateTime %>.
             </li>
             <% }  %>
-        <% }) %>
-    </ul>
+            <% }) %>
+        </ul>
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.getJSON('/api/notifications',
                 function (notifications) {
                     if (notifications.length === 0)
@@ -95,9 +95,16 @@
                         title: 'Notifications',
                         content: function () {
                             var compiled = _.template($('#notifications-template').html());
-                            return compiled({ notifications : notifications });
+                            return compiled({ notifications: notifications });
                         },
                         template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                    }).on('shown.bs.popover', function () {
+                        $.post("/api/Notifications/MarkAsRead")
+                            .success(function () {
+                                $('.js-notifications-count').text("").addClass('hide');
+                            }).fail(function () {
+                                alert("Shown bs popover failed!");
+                            });
                     });
                 });
         });
