@@ -1,7 +1,53 @@
-﻿@{
+﻿@model GigHub.ViewModels.GigDetailViewModel
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    Gig detail model
-</p>
+<div class="gig-detail">
+    <div>
+        <span><h2>@Model.Artist</h2></span>
+        @if (Model.IsUserAuthenticated)
+        {
+            if (Model.IsFollowing)
+            {
+                <button class="btn btn-info btn-sm">Following</button>
+            }
+            else
+            {
+                <button data-followee-id="@Model.UserId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
+            }
+
+        }
+    </div>
+    <div>
+        Performing at @Model.Venue on @Model.Date at @Model.Time
+    </div>
+    @if (Model.IsUserAuthenticated && Model.IsAttending)
+    {
+        <hr />
+        <div class="alert alert-info">You are going to this event!</div>
+    }
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".js-toggle-follow").click(function(e) {
+                var button = $(e.target);
+                $.post("/api/followings", { followeeId: button.attr("data-followee-id") })
+                    .done(function() {
+                        button
+                            .text("Following")
+                            .removeClass('btn-default')
+                            .addClass('btn-info');
+                    })
+                    .fail(function() {
+                        alert("Something failed!");
+                    });
+            });
+
+        });
+    </script>
+}

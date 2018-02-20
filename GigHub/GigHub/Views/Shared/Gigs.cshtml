@@ -9,7 +9,7 @@
 {
     <div class="form-group">
         <div id="search-gigs" class="input-group">
-            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artists, venue, genre..."})
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artists, venue, genre..." })
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-search"></i>
             </span>
@@ -25,15 +25,17 @@
                 <div class="day">@gig.DateTime.ToString("d ")</div>
             </div>
             <div class="details">
-                <a href="@Url.Action("Detail", "Gigs", new {id = @gig.Id})">
-                    <span class="artist">
+
+                <span class="artist">
+                    <a href="@Url.Action("Detail", "Gigs", new {id = @gig.Id})">
                         @gig.Artist.Name
-                        @if (Model.ShowActions)
-                        {
-                            <button data-followee-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow pull-right">Follow</button>
-                        }
-                    </span>
-                </a>
+                    </a>
+                    @if (Model.ShowActions)
+                {
+                        <button data-followee-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow pull-right">Follow</button>
+                    }
+                </span>
+
                 <span class="genre">@gig.Genre.Name</span>
                 @if (Model.ShowActions && !@gig.IsCancelled)
                 {

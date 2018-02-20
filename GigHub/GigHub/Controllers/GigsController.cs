@@ -115,7 +115,25 @@ namespace GigHub.Controllers
         [HttpGet]
         public ActionResult Detail(int id)
         {
-            return View();
+            var gig = _context.Gigs
+                .Include(g => g.Artist)
+                .Include(g => g.Artist.Followers)
+                .Include(g => g.Attendances)
+                .Single(g => g.Id == id);
+
+            var viewModel = new GigDetailViewModel
+            {
+                Artist = gig.Artist.Name,
+                DateTime = gig.DateTime,
+                Venue = gig.Venue,
+                IsUserAuthenticated = User.Identity.IsAuthenticated,
+                UserId = User.Identity.GetUserId(),
+                Followers = gig.Artist.Followers,
+                Attendances = gig.Attendances
+
+            };
+
+            return View(viewModel);
         }
 
         [Authorize]
