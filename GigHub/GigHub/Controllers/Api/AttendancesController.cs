@@ -41,12 +41,17 @@ namespace GigHub.Controllers.Api
         [HttpDelete]
         public IHttpActionResult Unattend(int id)
         {
+            var userId = User.Identity.GetUserId();
+            var attendance = _context.Attendances
+                .SingleOrDefault(a => a.GigId == id && a.AttendeeId == userId);
 
-            var attendance = _context.Attendances.Single(a => a.GigId == id);
+            if (attendance == null)
+                return NotFound();
+
             _context.Entry(attendance).State = EntityState.Deleted;
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(id);
         }
     }
 }
