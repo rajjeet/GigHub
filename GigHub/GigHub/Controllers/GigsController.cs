@@ -112,6 +112,12 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
+        [HttpGet]
+        public ActionResult Detail(int id)
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult Edit(int id)
         {
