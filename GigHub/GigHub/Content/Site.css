@@ -205,3 +205,13 @@ h6,
 #search-gigs {
     width: 300px;
 } 
+
+
+#search-gigs > form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -ms-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
+}
