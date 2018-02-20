@@ -34,37 +34,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/followings", { followeeId: button.attr("data-followee-id") })
-                        .done(function () {
-                            button
-                                .text("Following")
-                                .removeClass('btn-default')
-                                .addClass('btn-info');
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-
-                } else {
-                    $.ajax({
-                        url: "/api/followings/" + button.attr("data-followee-id"),
-                        method: "DELETE"
-                    })
-                        .done(function () {
-                            button
-                                .text("Follow")
-                                .removeClass("btn-info")
-                                .addClass("btn-default");
-                        }).fail(function () {
-                            alert("Something failed!");
-                        });
-                }
-            });
-
+            followingController.init();
         });
     </script>
 }
