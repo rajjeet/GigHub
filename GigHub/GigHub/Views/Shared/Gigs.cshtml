@@ -16,7 +16,7 @@
         </div>
     </div>
 }
-<ul class="gigs">
+<ul id="gigs-list" class="gigs">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -61,8 +61,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            GigsController.initAttendance();
-            GigsController.initFollowing();
+            GigsController.initAttendance("#gigs-list");
         });
     </script>
 }
