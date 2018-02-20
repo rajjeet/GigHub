@@ -1,6 +1,7 @@
 ﻿using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -35,6 +36,17 @@ namespace GigHub.Controllers.Api
             _context.SaveChanges();
 
             return Ok("User sucessfully registered to this gig!");
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Unattend(int id)
+        {
+
+            var attendance = _context.Attendances.Single(a => a.GigId == id);
+            _context.Entry(attendance).State = EntityState.Deleted;
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }
