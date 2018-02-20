@@ -47,10 +47,9 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
-    <script type="text/underscore-template" id="notifications-template">
+<script type="text/underscore-template" id="notifications-template">
         <ul class="notifications">
             <% _.each(notifications, function(n) {
             if (n.type == 1) { %>
@@ -59,14 +58,12 @@
             </li>
             <% } else if (n.type == 2 ) { %>
             <li>
-                <span class="highlight"><%= n.gig.artist.name %></span> has changed the
-                <% if (n.originalDateTime == n.gig.dateTime && n.originalVenue != n.gig.venue) {  %>
-                venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
-                <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue == n.gig.venue) { %>
-                date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>.
-                <% } else if (n.originalDateTime != n.gig.dateTime && n.originalVenue != n.gig.venue) { %>
-                date/time from <%= n.originalDateTime %> to <%= n.gig.dateTime %>
-                and the venue from <%= n.originalVenue %> to <%= n.gig.venue %>.
+                <span class="highlight"><%= n.gig.artist.name %></span> has changed:
+                <% if (n.originalVenue != n.gig.venue) {  %>
+                * the venue from <%= n.originalVenue %> to <%= n.gig.venue %>
+                <% } %>
+                <% if (n.originalDateTime != n.gig.dateTime) { %>
+                * the date/time from <%= moment(n.originalDateTime).format("D MMM HH:mm") %> to <%= moment(n.gig.dateTime).format("D MMM HH:mm") %>.
                 <% } %>
             </li>
             <% } else if (n.type == 3 ) { %>
