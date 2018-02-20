@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -37,6 +38,14 @@ namespace GigHub.Models
         public void Notify(Notification notification)
         {
             UserNotifications.Add(new UserNotification(this, notification));
+        }
+
+        public void MarkUnreadNotificationsAsRead()
+        {
+            foreach (var notification in UserNotifications.Where(un => !un.IsRead))
+            {
+                notification.IsRead = true;
+            }
         }
     }
 }

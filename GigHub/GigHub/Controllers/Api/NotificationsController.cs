@@ -13,7 +13,7 @@ namespace GigHub.Controllers.Api
     {
         private ApplicationDbContext _context;
 
-        
+
         public NotificationsController()
         {
             _context = new ApplicationDbContext();
@@ -33,6 +33,7 @@ namespace GigHub.Controllers.Api
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
 
+        [Authorize]
         [HttpPost]
         public IHttpActionResult MarkAsRead()
         {
@@ -40,7 +41,6 @@ namespace GigHub.Controllers.Api
             var unreadUserNotifications = _context.UserNotifications
                 .Where(un => un.UserId == userId && !un.IsRead)
                 .ToList();
-
 
             unreadUserNotifications.ForEach(un => un.Read());
 
