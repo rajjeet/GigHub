@@ -129,13 +129,10 @@ namespace GigHub.Controllers
 
             var viewModel = new GigDetailViewModel
             {
-                Artist = gig.Artist.Name,
-                DateTime = gig.DateTime,
-                Venue = gig.Venue,
+            
+                Gig = gig,
                 IsUserAuthenticated = User.Identity.IsAuthenticated,
-                UserId = User.Identity.GetUserId(),
-                Followers = gig.Artist.Followers,
-                Attendances = gig.Attendances
+                UserId = User.Identity.GetUserId()                
 
             };
 

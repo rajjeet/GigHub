@@ -6,22 +6,22 @@
 
 <div class="gig-detail">
     <div>
-        <span><h2>@Model.Artist</h2></span>
+        <span><h2>@Model.Gig.Artist.Name</h2></span>
         @if (Model.IsUserAuthenticated)
         {
             if (Model.IsFollowing)
             {
-                <button class="btn btn-info btn-sm">Following</button>
+                <button data-followee-id="@Model.Gig.ArtistId" class="btn btn-info btn-sm js-toggle-follow">Following</button>
             }
             else
             {
-                <button data-followee-id="@Model.UserId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
+                <button data-followee-id="@Model.Gig.ArtistId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
             }
 
         }
     </div>
     <div>
-        Performing at @Model.Venue on @Model.Date at @Model.Time
+        Performing at @Model.Gig.Venue on @Model.Date at @Model.Time
     </div>
     @if (Model.IsUserAuthenticated && Model.IsAttending)
     {
@@ -33,19 +33,36 @@
 
 @section scripts {
     <script>
-        $(document).ready(function() {
-            $(".js-toggle-follow").click(function(e) {
+        $(document).ready(function () {
+            $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/followings", { followeeId: button.attr("data-followee-id") })
-                    .done(function() {
-                        button
-                            .text("Following")
-                            .removeClass('btn-default')
-                            .addClass('btn-info');
+
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/followings", { followeeId: button.attr("data-followee-id") })
+                        .done(function () {
+                            button
+                                .text("Following")
+                                .removeClass('btn-default')
+                                .addClass('btn-info');
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+
+                } else {
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("data-followee-id"),
+                        method: "DELETE"
                     })
-                    .fail(function() {
-                        alert("Something failed!");
-                    });
+                        .done(function () {
+                            button
+                                .text("Follow")
+                                .removeClass("btn-info")
+                                .addClass("btn-default");
+                        }).fail(function () {
+                            alert("Something failed!");
+                        });
+                }
             });
 
         });
