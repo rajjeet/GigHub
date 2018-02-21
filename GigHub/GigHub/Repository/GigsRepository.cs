@@ -44,5 +44,10 @@ namespace GigHub.Repository
                 .Include(g => g.Attendances.Select(a => a.Attendee))
                 .Single(g => g.Id == id);
         }
+
+        public void Add(Gig gig)
+        {
+            _context.Gigs.Add(gig);
+        }
     }
 }
