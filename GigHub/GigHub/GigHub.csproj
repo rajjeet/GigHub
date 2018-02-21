@@ -267,6 +267,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AttendancesRepository.cs" />
     <Compile Include="Repository\FollowingsRepository.cs" />
+    <Compile Include="Repository\GenreRepository.cs" />
     <Compile Include="Repository\GigsRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FollowingViewModel.cs" />
