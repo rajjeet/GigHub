@@ -60,5 +60,7 @@ namespace GigHub.Persistance.Repositories
         {
             _context.Gigs.Add(gig);
         }
+
+        
     }
 }
