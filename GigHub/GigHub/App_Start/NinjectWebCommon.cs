@@ -1,4 +1,3 @@
-using GigHub.Persistance;
 using Ninject.Web.Common.WebHost;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(GigHub.App_Start.NinjectWebCommon), "Start")]
@@ -8,6 +7,7 @@ namespace GigHub.App_Start
 {
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
+    using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
     using System;
     using System.Web;
@@ -47,6 +47,14 @@ namespace GigHub.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                kernel.Bind(x =>
+                {
+                    x.FromThisAssembly()
+                        .SelectAllClasses()
+                        .BindDefaultInterface();
+                });
+
                 return kernel;
             }
             catch
@@ -62,7 +70,7 @@ namespace GigHub.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            
         }        
     }
 }
