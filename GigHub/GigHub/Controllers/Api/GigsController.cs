@@ -21,6 +21,9 @@ namespace GigHub.Controllers.Api
            
             var gig = _unitOfWork.Gigs.GetGigByGigId(id);
 
+            if (gig == null)
+                return NotFound();
+
             if (gig.IsCancelled)
                 return NotFound();
 
