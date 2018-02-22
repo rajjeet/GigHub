@@ -29,6 +29,7 @@ namespace GigHub.Persistance
             modelBuilder.Configurations.Add(new GigConfigurations());
             modelBuilder.Configurations.Add(new ApplicationUserConfigurations());
             modelBuilder.Configurations.Add(new UserNotificationConfigurations());
+            modelBuilder.Configurations.Add(new AttendanceConfigurations());
 
             base.OnModelCreating(modelBuilder);
         }
