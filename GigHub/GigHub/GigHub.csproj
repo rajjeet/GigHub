@@ -270,6 +270,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Persistance\EntityConfigurations\ApplicationUserConfigurations.cs" />
+    <Compile Include="Persistance\EntityConfigurations\AttendanceConfigurations.cs" />
     <Compile Include="Persistance\EntityConfigurations\GigConfigurations.cs" />
     <Compile Include="Persistance\EntityConfigurations\UserNotificationConfigurations.cs" />
     <Compile Include="Persistance\Migrations\201802120213076_Initial.cs" />
