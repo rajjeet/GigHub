@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Data.Entity;
-using System.Linq;
+﻿using GigHub.Core;
+using Microsoft.AspNet.Identity;
 using System.Web.Http;
-using GigHub.Core.Models;
-using GigHub.Persistance;
 
 namespace GigHub.Controllers.Api
 {
     public class GigsController : ApiController
-    {
-        private readonly ApplicationDbContext _context;
+    {        
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GigsController()
+        public GigsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [Authorize]
@@ -21,16 +18,18 @@ namespace GigHub.Controllers.Api
         public IHttpActionResult Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs
-                .Include(g => g.Attendances.Select(a => a.Attendee))
-                .Single(g => g.Id == id && g.ArtistId == userId);
+           
+            var gig = _unitOfWork.Gigs.GetGigByGigId(id);
 
             if (gig.IsCancelled)
                 return NotFound();
 
+            if (gig.ArtistId != userId)
+                return BadRequest();
+
             gig.Cancel();
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok("Gig cancelled.");
         }
