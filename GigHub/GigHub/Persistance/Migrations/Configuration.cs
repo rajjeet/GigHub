@@ -1,11 +1,10 @@
-using GigHub.Core.Models;
 using GigHub.Persistance;
 
 namespace GigHub.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
