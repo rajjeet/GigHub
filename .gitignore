@@ -10,3 +10,5 @@ GigHub/GigHub/obj/
 */packages/*
 Gighub/GigHub.Tests/bin/*
 Gighub/GigHub.Tests/obj/*
+GigHub/GigHub.IntegrationTests/bin/*
+GigHub/GigHub.IntegrationTests/obj/*
