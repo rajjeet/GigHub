@@ -5,7 +5,18 @@ using System.Data.Entity;
 
 namespace GigHub.Persistance
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public interface IApplicationDbContext
+    {
+        DbSet<Gig> Gigs { get; set; }
+        DbSet<Genre> Genres { get; set; }
+        DbSet<Attendance> Attendances { get; set; }
+        DbSet<Following> Followings { get; set; }
+        DbSet<Notification> Notifications { get; set; }
+        DbSet<UserNotification> UserNotifications { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; }
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Gig> Gigs { get; set; }
         public DbSet<Genre> Genres { get; set; }
