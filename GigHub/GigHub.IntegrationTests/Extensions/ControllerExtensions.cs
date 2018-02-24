@@ -15,15 +15,9 @@ namespace GigHub.IntegrationTests.Extensions
             identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId));
 
             var principal = new GenericPrincipal(identity, null);
-
-            var mockHttpContent = new Mock<HttpContextBase>();
-            mockHttpContent.SetupGet(hc => hc.User).Returns(principal);
-
-            var mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext).Returns(mockHttpContent.Object);
-
-            controller.ControllerContext = mockControllerContext.Object;
-
+         
+            controller.ControllerContext = Mock.Of<ControllerContext>(ctx => 
+                ctx.HttpContext == Mock.Of<HttpContextBase>(http => http.User == principal));
         }
     }
 }
